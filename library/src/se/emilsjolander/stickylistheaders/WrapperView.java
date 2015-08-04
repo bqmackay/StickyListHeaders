@@ -93,7 +93,8 @@ public class WrapperView extends ViewGroup {
 				mHeader.measure(childWidthMeasureSpec,
 						MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
 			}
-			measuredHeight += mHeader.getMeasuredHeight();
+			//Kees the cell as the same height
+//			measuredHeight += mHeader.getMeasuredHeight();
 		} else if (mDivider != null&&mItem.getVisibility()!=View.GONE) {
 			measuredHeight += mDividerHeight;
 		}
@@ -129,8 +130,8 @@ public class WrapperView extends ViewGroup {
 		if (mHeader != null) {
 			int headerHeight = mHeader.getMeasuredHeight();
 			mHeader.layout(l, t, r, headerHeight);
-			mItemTop = headerHeight;
-			mItem.layout(l, headerHeight, r, b);
+			mItemTop = t; // was headerHeight. This was removed so the header runs into the cell
+			mItem.layout(l, t, r, b);
 		} else if (mDivider != null) {
 			mDivider.setBounds(l, t, r, mDividerHeight);
 			mItemTop = mDividerHeight;
